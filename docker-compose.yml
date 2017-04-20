@@ -1,0 +1,11 @@
+mcitjenkinsdata:
+  build: mcit-jenkins-data-build
+  volumes:
+    - /jenkins_home:/var/jenkins_home
+mcitjenkins:
+  build: mcit-jenkins-build
+  volumes_from:
+    - mcitjenkinsdata
+  ports:
+    - "8080:8080"
+    - "50000:50000"
