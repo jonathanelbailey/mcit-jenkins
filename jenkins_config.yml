@@ -1,0 +1,10 @@
+---
+- name: Configure CI Server
+hosts: all
+sudo: True
+tasks:
+  - name: install git
+    yum:
+      name=git
+      state=present
+    

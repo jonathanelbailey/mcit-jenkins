@@ -12,13 +12,13 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "bento/ubuntu-16.04"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
-  # config.vm.box_check_update = false
-
+  config.vm.box_check_update = true
+  
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
@@ -64,23 +64,5 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
-  apt-get install nfs-common linux-image-extra-$(uname -r) \
-    linux-image-extra-virtual apt-transport-https ca-certificates curl \
-    software-properties-common -y
-  mkdir /jenkins_home
-  mount -t nfs nfs1.magiccityit.com:/data-volume/remote/docker_volumes/mcit-jenkins-data /jenkins_home
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  add-apt-repository \
-    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) \
-    stable"
-  apt-get update -y
-  apt-get install docker-ce -y
-  curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-  chmod +x /usr/local/bin/docker-compose
-  cd /vagrant
-  docker-compose up -d
-  echo "admin password is $(docker exec vagrant_mcitjenkins_1 cat /var/jenkins_home/secrets/initialAdminPassword)"
-  SHELL
+  config.vm.provision "shell", path: "provision_jenkins.sh"
 end

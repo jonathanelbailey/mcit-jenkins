@@ -9,3 +9,6 @@ mcitjenkins:
   ports:
     - "8080:8080"
     - "50000:50000"
+  cap_add:
+    - SYS_ADMIN
+  privileged: true
