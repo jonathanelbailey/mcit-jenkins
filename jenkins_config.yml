@@ -1,10 +1,15 @@
 ---
 - name: Configure CI Server
-hosts: all
-sudo: True
-tasks:
-  - name: install git
-    yum:
-      name=git
-      state=present
-    
+  hosts: all
+  vars:
+    jenkins_plugins:
+      - github
+      - mask-passwords
+      - ssh
+      - scm-sync-configuration
+      - blueocean
+      - postbuild-task
+  sudo: True
+  roles:
+    - git
+    - geerlingguy.jenkins
