@@ -1,2 +1,3 @@
 .vagrant/*
 *.log
+id_rsa*
