@@ -1,3 +1,4 @@
 .vagrant/*
 *.log
 id_rsa*
+*.retry
