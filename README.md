@@ -1,22 +1,15 @@
 # mcit-jenkins
+
 a vagrant box that brings up a portable jenkins server.  The server itself is configured through ansible.
 
-## Contents
-- mcit-jenkins-build/Dockerfile *DEPRECATED*
-- mcit-jenkins-data-build/Dockerfile *DEPRECATED*
-- roles/git/tasks/main.yml
-- docker-compose.yml *DEPRECATED*
-- Vagrantfile
-- jenkins_config.yml
-- LICENSE
-- README.md
-- provision_jenkins.sh
-- provision_docker.sh *DEPRECATED*
+## Version 1.0.0
+
+
 
 ## Dependencies
-- ansible 2.0+
-- bento/ubuntu-16.04
-- jenkins 2.6+
+- ansible 2.5+
+- centos/7 vagrant box
+- jenkins 2.7+
 
 ## Requisites
 - vagrant

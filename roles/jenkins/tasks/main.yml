@@ -1,0 +1,13 @@
+- name: jenkins container is present
+  docker_container:
+    name: mcit_jenkins
+    image: jenkins/jenkins:lts
+    state: started
+    pull: yes
+    restart_policy: always
+    network_mode: host
+    exposed_ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - /vagrant/jenkins_home:/var/jenkins_home

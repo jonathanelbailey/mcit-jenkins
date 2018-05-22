@@ -1,0 +1,42 @@
+- name: remove existing docker packages
+  yum:
+    name: {{items}}
+    state: absent
+  with_items:
+    - docker
+    - docker-client
+    - docker-client-latest
+    - docker-common
+    - docker-latest
+    - docker-latest-logrotate
+    - docker-logrotate
+    - docker-selinux
+    - docker-engine-selinux
+    - docker-engine
+  become: yes
+
+- name: install required docker packages
+  yum:
+    name: {{items}}
+    state: present
+  with_items:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+  become: yes
+
+- name: add latest docker repo
+  command: yum-config-manager --add-repo {{docker_repo}}
+  become: yes
+
+- name: install docker ce
+  yum:
+    name: docker-ce
+    state: present
+  become: yes
+
+- name: start and enable docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
