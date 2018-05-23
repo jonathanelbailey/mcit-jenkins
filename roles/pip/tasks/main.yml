@@ -1,0 +1,20 @@
+- name: enable epel
+  yum:
+    name: epel-release
+    state: present
+  become: yes
+
+- name: update
+  yum:
+    name: "*"
+    state: latest
+  become: yes
+
+- name: install dependencies
+  yum:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - python-pip
+    - python-virtualenv
+  become: yes

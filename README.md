@@ -14,6 +14,7 @@ a vagrant box that brings up a portable jenkins server.  The server itself is co
 ## Requisites
 - vagrant
 - virtualbox
+- vagrant plugin: vagrant-vbguest
 
 ## Usage
 

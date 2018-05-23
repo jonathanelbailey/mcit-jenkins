@@ -1,3 +1,11 @@
+- name: set ownership for jenkins_home folder
+  file:
+    path: /vagrant/jenkins_home
+    owner: 1000
+    group: 1000
+    recurse: yes
+  become: yes
+
 - name: jenkins container is present
   docker_container:
     name: mcit_jenkins
@@ -11,3 +19,6 @@
       - 50000:50000
     volumes:
       - /vagrant/jenkins_home:/var/jenkins_home
+    env:
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
+  become: yes

@@ -1,6 +1,6 @@
 - name: remove existing docker packages
   yum:
-    name: {{items}}
+    name: "{{item}}"
     state: absent
   with_items:
     - docker
@@ -17,7 +17,7 @@
 
 - name: install required docker packages
   yum:
-    name: {{items}}
+    name: "{{item}}"
     state: present
   with_items:
     - yum-utils
@@ -40,3 +40,10 @@
     name: docker
     state: started
     enabled: yes
+  become: yes
+
+- name: install docker-py
+  pip:
+    name: docker-py
+    state: present
+  become: yes
