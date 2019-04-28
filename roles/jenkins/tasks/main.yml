@@ -1,7 +1,8 @@
 ---
 - name: create jenkins_home volume folder
-  file: "{{ jenkins_Home_path }}"
-  state: directory
+  file: 
+    path: "{{ jenkins_Home_path }}"
+    state: directory
 
 - name: deploy jenkins image with docker
   docker_container:
