@@ -1,0 +1,22 @@
+---
+uninstall_these_packages:
+  - docker
+  - docker-engine
+  - docker.io
+  - containerd
+  - runc
+
+install_these_packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - software-properties-common
+
+apt_gpg_key: https://download.docker.com/linux/ubuntu/gpg
+apt_repo_url: deb [arch=amd64] https://download.docker.com/linux/ubuntu
+
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io

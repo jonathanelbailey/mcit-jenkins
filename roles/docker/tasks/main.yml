@@ -1,0 +1,26 @@
+---
+- name: uninstall old docker dependencies
+  apt:
+    name: "{{ uninstall_these_packages }}"
+    state: absent
+
+- name: update apt repos and download dependencies
+  apt:
+    name: "{{ install_these_packages }}"
+    state: present
+    update_cache: yes
+
+- name: add docker gpg key to apt
+  apt_key:
+    url: "{{ apt_gpg_key }}"
+    state: present
+
+- name: add docker repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu
+    codename: "{{ ansible_distribution_release }}"
+
+- name: update changes and install docker-ce
+  apt:
+    name: "{{ docker_packages }}"
+    update_cache: yes

@@ -9,7 +9,7 @@
       - scm-sync-configuration
       - blueocean
       - postbuild-task
-  sudo: True
+  become: yes
   roles:
-    - git
-    - geerlingguy.jenkins
+    - docker
+    - jenkins

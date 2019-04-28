@@ -1,0 +1,3 @@
+---
+jenkins_home_path: /vagrant/jenkins_home
+jenkins_container_name: mcit_jenkins

@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "bento/ubuntu-16.04"
+  config.vm.box = "ubuntu/eoan64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -48,7 +48,8 @@ Vagrant.configure(2) do |config|
     vb.gui = false
 
     # Customize the amount of memory on the VM:
-    vb.memory = "2048"
+    vb.memory = 4096
+    vb.cpus = 4
   end
   #
   # View the documentation for the provider you are using for more
@@ -64,5 +65,9 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", path: "provision_jenkins.sh"
+  config.vm.provision "shell", path: "provision_ansible.sh"
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "jenkins_config.yml"
+  end
 end

@@ -1,0 +1,16 @@
+---
+- name: create jenkins_home volume folder
+  file: "{{ jenkins_Home_path }}"
+  state: directory
+
+- name: deploy jenkins image with docker
+  docker_container:
+    image: jenkins/jenkins:lts
+    name: "{{ jenkins_container_name }}"
+    state: started
+    restart: yes
+    ports:
+      - 8080:8080
+      - 5000:5000
+    volumes:
+      - "{{ jenkins_home_path }}:/var/jenkins_home"
