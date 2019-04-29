@@ -17,10 +17,15 @@
 
 - name: add docker repository
   apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu
-    codename: "{{ ansible_distribution_release }}"
+    repo: "{{ apt_repo_url }}"
+    state: present
 
 - name: update changes and install docker-ce
   apt:
     name: "{{ docker_packages }}"
     update_cache: yes
+
+- name: install docker pip package
+  pip:
+    name: docker
+    state: present

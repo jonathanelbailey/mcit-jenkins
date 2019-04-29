@@ -1,7 +1,7 @@
 ---
 - name: create jenkins_home volume folder
   file: 
-    path: "{{ jenkins_Home_path }}"
+    path: "{{ jenkins_home_path }}"
     state: directory
 
 - name: deploy jenkins image with docker
@@ -15,3 +15,11 @@
       - 5000:5000
     volumes:
       - "{{ jenkins_home_path }}:/var/jenkins_home"
+
+- name: grab jenkins initial admin password
+  command: "docker exec {{ jenkins_container_name }} cat /var/jenkins_home/secrets/initialAdminPassword"
+  register: initial_password
+
+- name: display jenkins initial admin password
+  debug:
+    var: initial_password.stdout_lines
